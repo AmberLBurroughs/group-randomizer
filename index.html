@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentation Randomizer</title>
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <style type="text/css">
+    body {
+      background: url("ignasi_pattern_s.png") repeat;
+      min-height: 100vh;
+      color:#fff;
+      font-family: 'Varela Round', sans-serif;
+      font-size: 30px;
+    }
+
+    h2 {
+      color:#122a68;
+    }
+    .overlay {
+      background-color: rgba(104,203,194, .3);
+      min-height: 100vh;
+      padding-top: 5%;
+    }
+    .rows {
+      margin: 0px 10%;
+    }
+    li, ul {text-align: left;}
+
+    #random {
+      margin-top: 35%;
+      background-color: #6582c2;
+      border:1px solid #6582c2;
+      padding: 20px;
+      font-size: 36px;
+    }
+
+    #random:hover, #random:active, #random:focus {
+
+      background-color:#b099c2;
+      border:1px solid #b099c2;
+    }
+   ol li {
+      color: #6582c2;
+    }
+    ul li {
+      color: #6582c2;
+    }
+    #ball {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: #122a68;
+      position: relative;
+    }
+    #ball p {
+      position: absolute;
+      top: 72px;
+      left: 16px;
+      font-size: 36px;
+    }
+    @keyframes bounce {
+      from { transform: translate3d(0, 0, 0);     }
+      to   { transform: translate3d(0, 200px, 0); }
+    }
+
+    /* Prefix Support */
+    ball {
+      -webkit-animation-name: bounce;
+      -webkit-animation-duration: 0.5s;
+      -webkit-animation-direction: alternate;
+      -webkit-animation-timing-function: cubic-bezier(.5,0.05,1,.5);
+      -webkit-animation-iteration-count: infinite;
+    }
+
+    @-webkit-keyframes bounce {
+      from { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+      to   { -webkit-transform: translate3d(0, 200px, 0); transform: translate3d(0, 200px, 0); }
+    }
+  </style>
+</head>
+<body>
+<div class="overlay">
+  <div class="container" align="center">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="bouncing" id="ball"></div>
+        <button class="btn btn-primary" id="random">RANDOMIZE</button>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="row rows">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h2>ORDER</h2>
+            <ol id="teamOrder"></ol>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h2>TEAMS</h2>
+            <ul id="teams"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+     
+      
+
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script>
+    var groups = ["GROUP 1", "GROUP 2", "GROUP 3", "GROUP 4", "GROUP 5", "GROUP 6"];
+    var order = []
+    var counter = 0
+
+    $("#teams").empty()
+    groups.forEach(function(team){
+      var li = $('<li>').text(team)
+      $("#teams").append(li)
+    })
+
+    $("#random").on("click", function(){
+      $("#ball").html("")
+        counter = counter + 1;
+         var num = genrandomIndex(groups);
+
+         $("#ball").css("animation", "bounce 0.5s");
+         $("#ball").css("animation-direction", "alternate");
+         $("#ball").css("animation-timing-function", "cubic-bezier(.5,0.05,1,.5)");
+         $("#ball").css("animation-iteration-count", 6);
+
+          order.push(groups[num]);
+        
+          
+          groups.splice(num, 1);
+          console.log(order)
+          console.log(num)
+
+           setTimeout(function(){ 
+            // console.log("In", order[counter])
+            var p = $("<p>").text(order[counter-1])
+            $("#ball").append(p)
+            $("#ball").css("animation", "");
+            $("#ball").css("animation-direction", "");
+            $("#ball").css("animation-timing-function", "");
+            $("#ball").css("animation-iteration-count", 0);
+            $("#teamOrder").text("")
+
+            $("#teamOrder").html("");
+            order.forEach(function(team){
+              var li = $('<li>').text(team)
+              $("#teamOrder").append(li)
+            });
+
+            $("#teams").empty();
+            groups.forEach(function(team){
+                var li = $('<li>').text(team)
+                $("#teams").append(li)
+            });
+
+          }, 3000);
+        
+        if(counter === 6){
+          $("#random").addClass("disabled").attr("disabled");
+        }
+     
+    })
+
+    function genrandomIndex(groups){
+      return Math.floor(Math.random() * groups.length-1) + 1; 
+    }
+   
+  </script>
+</body>
+</html>
