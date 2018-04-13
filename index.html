@@ -27,17 +27,19 @@
     li, ul {text-align: left;}
 
     #random {
-      margin-top: 35%;
+      margin-top: 45%;
       background-color: #6582c2;
       border:1px solid #6582c2;
       padding: 20px;
       font-size: 36px;
     }
-
+    
     #random:hover, #random:active, #random:focus {
-
       background-color:#b099c2;
       border:1px solid #b099c2;
+    }
+    img {
+      max-height: 100%;
     }
    ol li {
       color: #6582c2;
@@ -124,11 +126,13 @@
       $("#ball").html("")
         counter = counter + 1;
          var num = genrandomIndex(groups);
-
+         var img = $("<img>").attr("src","https://bit.ly/2JG4UOJ")
+         $("#ball").append(img)
          $("#ball").css("animation", "bounce 0.5s");
          $("#ball").css("animation-direction", "alternate");
          $("#ball").css("animation-timing-function", "cubic-bezier(.5,0.05,1,.5)");
-         $("#ball").css("animation-iteration-count", 6);
+         $("#ball").css("animation-iteration-count",  6);
+
 
           order.push(groups[num]);
         
@@ -139,6 +143,7 @@
 
            setTimeout(function(){ 
             // console.log("In", order[counter])
+            $("#ball").empty()
             var p = $("<p>").text(order[counter-1])
             $("#ball").append(p)
             $("#ball").css("animation", "");
