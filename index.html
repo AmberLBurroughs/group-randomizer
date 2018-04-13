@@ -16,12 +16,12 @@
     }
 
     .row {
-      margin-top: 5%;
+      margin-top: 4%;
     }
 
     h1 {
       color:#122a68;
-      margin-bottom: 5%;
+      margin-bottom: 4%;
     }
     
     h2 {
@@ -36,11 +36,12 @@
     li, ul {text-align: left;}
 
     #random {
-      margin-top: 45%;
+      margin-top: 40%;
       background-color: #6582c2;
       border:1px solid #6582c2;
       padding: 20px;
       font-size: 36px;
+      display: none;
     }
     
     #random:hover, #random:active, #random:focus {
@@ -98,7 +99,7 @@
 <body>
 <div class="overlay">
   <div class="container" align="center">
-    <h1>PROJECT 1 PRESENTATION RANDOMIZER</h1>
+    <h1 class="title">PROJECT 1 PRESENTATION RANDOMIZER</h1>
     <hr>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
@@ -121,7 +122,9 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   <script>
-    var groups = ["GROUP 1", "GROUP 2", "GROUP 4", "GROUP 5", "GROUP 6", "GROUP 7", "GROUP 8"];
+$(document).ready(function(){
+  $("#random").slideDown("slow");
+  var groups = ["GROUP 1", "GROUP 2", "GROUP 4", "GROUP 5", "GROUP 6", "GROUP 7", "GROUP 8"];
     var order = []
     var counter = 0
 
@@ -173,7 +176,7 @@
             $("#teams").empty();
             groups.forEach(function(team){
                 var li = $('<li>').text(team)
-                $("#teams").append(li)
+                $("#teams").append(li);
             });
 
           }, 3000);
@@ -183,7 +186,8 @@
         if(counter === 7){
           $("#random").addClass("disabled").attr("disabled");
           setTimeout(function(){ 
-            $("#ball").empty()
+            $("#ball").empty();
+            $("#teams").slideUp("slow")
           }, 1000)
         }
      
@@ -192,6 +196,8 @@
     function genrandomIndex(groups){
       return Math.floor(Math.random() * groups.length-1) + 1; 
     }
+})
+    
    
   </script>
 </body>
