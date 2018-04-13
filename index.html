@@ -177,7 +177,7 @@ $(document).ready(function(){
           groups.splice(num, 1);
           console.log(order)
           console.log(num)
-
+           $("#random").addClass("disabled").attr("disabled");
            setTimeout(function(){ 
             // console.log("In", order[counter])
             $("#ball").empty()
@@ -200,6 +200,7 @@ $(document).ready(function(){
                 var li = $('<li>').text(team)
                 $("#teams").append(li);
             });
+            $("#random").removeClass("disabled").attr("disabled", false);
             setTimeout(function(){ 
               $("#ball").empty()
               var h3 = $("<h3>").text("?")  
@@ -213,7 +214,7 @@ $(document).ready(function(){
           $("#random").addClass("disabled").attr("disabled");
           setTimeout(function(){ 
             $("#ball").empty();
-            $("#teams").slideUp("slow")
+            $("#teams").slideUp("slow");
           }, 1000)
         }
      
