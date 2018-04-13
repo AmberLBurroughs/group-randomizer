@@ -78,6 +78,21 @@
       left: 16px;
       font-size: 36px;
     }
+
+    #ball h3 {
+      position: absolute;
+      top: 55px;
+      left: 85px;
+      font-size: 60px;
+      animation: spin 0.5s;
+      animation-iteration-count: 2;
+    }
+    @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+    }
+
+
     @keyframes bounce {
       from { transform: translate3d(0, 0, 0);     }
       to   { transform: translate3d(0, 200px, 0); }
@@ -125,6 +140,11 @@
   crossorigin="anonymous"></script>
   <script>
 $(document).ready(function(){
+ 
+  $("#ball").empty()
+  var h3 = $("<h3>").text("?")  
+  $("#ball").append(h3);
+
   $("#random").slideDown("slow");
   var groups = ["GROUP 1", "GROUP 2", "GROUP 4", "GROUP 5", "GROUP 6", "GROUP 7", "GROUP 8"];
     var order = []
@@ -180,9 +200,13 @@ $(document).ready(function(){
                 var li = $('<li>').text(team)
                 $("#teams").append(li);
             });
-
+            setTimeout(function(){ 
+              $("#ball").empty()
+              var h3 = $("<h3>").text("?")  
+              $("#ball").append(h3);
+            }, 700)
           }, 3000);
-        
+
         }
          
         if(counter === 7){
