@@ -163,7 +163,7 @@ $(document).ready(function(){
           var num = genrandomIndex(groups);
           
           //https://bit.ly/2JG4UOJ
-         var img = $("<img>").attr("src","https://bit.ly/2JG4UOJ");
+         var img = $("<img>").attr("src","https://bit.ly/2JEegL3");
          $("#ball").append(img)
          $("#ball").css("animation", "bounce 0.5s");
          $("#ball").css("animation-direction", "alternate");
@@ -210,7 +210,7 @@ $(document).ready(function(){
 
         }
          
-        if(counter === 7){
+        if(counter === groups.length){
           $("#random").addClass("disabled").attr("disabled");
           setTimeout(function(){ 
             $("#ball").empty();
