@@ -146,83 +146,83 @@ $(document).ready(function(){
   $("#ball").append(h3);
 
   $("#random").slideDown("slow");
+
   var groups = ["GROUP 1", "GROUP 2", "GROUP 3", "GROUP 4", "GROUP 5", "GROUP 6", "GROUP 7"];
-    var order = []
-    var counter = 0
+  var order = []
+  var counter = 0
 
-    $("#teams").empty()
-    groups.forEach(function(team){
-      var li = $('<li>').text(team)
-      $("#teams").append(li)
-    })
+  $("#teams").empty()
+  groups.forEach(function(team){
+    var li = $('<li>').text(team)
+    $("#teams").append(li)
+  });
 
-    $("#random").on("click", function(){
-      $("#ball").html("")
-        counter = counter + 1;
-        if(counter<8){
-          var num = genrandomIndex(groups);
-          
-          //https://bit.ly/2JG4UOJ
-         var img = $("<img>").attr("src","https://bit.ly/2JEegL3");
-         $("#ball").append(img)
-         $("#ball").css("animation", "bounce 0.5s");
-         $("#ball").css("animation-direction", "alternate");
-         $("#ball").css("animation-timing-function", "cubic-bezier(.5,0.05,1,.5)");
-         $("#ball").css("animation-iteration-count",  6);
-
-
-          order.push(groups[num]);
+  $("#random").on("click", function(){
+    $("#ball").html("")
+      counter = counter + 1;
+      if(counter < goups.length-1){
+        var num = genrandomIndex(groups);
         
-          
-          groups.splice(num, 1);
-          console.log(order)
-          console.log(num)
-           $("#random").addClass("disabled").attr("disabled");
-           setTimeout(function(){ 
-            // console.log("In", order[counter])
-            $("#ball").empty()
-            var p = $("<p>").text(order[counter-1])
-            $("#ball").append(p)
-            $("#ball").css("animation", "");
-            $("#ball").css("animation-direction", "");
-            $("#ball").css("animation-timing-function", "");
-            $("#ball").css("animation-iteration-count", 0);
-            $("#teamOrder").text("")
+        //https://bit.ly/2JG4UOJ
+       var img = $("<img>").attr("src","https://bit.ly/2JEegL3");
+       $("#ball").append(img)
+       $("#ball").css("animation", "bounce 0.5s");
+       $("#ball").css("animation-direction", "alternate");
+       $("#ball").css("animation-timing-function", "cubic-bezier(.5,0.05,1,.5)");
+       $("#ball").css("animation-iteration-count",  6);
 
-            $("#teamOrder").html("");
-            order.forEach(function(team){
+
+        order.push(groups[num]);
+      
+        
+        groups.splice(num, 1);
+        console.log(order)
+        console.log(num)
+         $("#random").addClass("disabled").attr("disabled");
+         setTimeout(function(){ 
+          // console.log("In", order[counter])
+          $("#ball").empty()
+          var p = $("<p>").text(order[counter-1])
+          $("#ball").append(p)
+          $("#ball").css("animation", "");
+          $("#ball").css("animation-direction", "");
+          $("#ball").css("animation-timing-function", "");
+          $("#ball").css("animation-iteration-count", 0);
+          $("#teamOrder").text("")
+
+          $("#teamOrder").html("");
+          order.forEach(function(team){
+            var li = $('<li>').text(team)
+            $("#teamOrder").append(li)
+          });
+
+          $("#teams").empty();
+          groups.forEach(function(team){
               var li = $('<li>').text(team)
-              $("#teamOrder").append(li)
-            });
-
-            $("#teams").empty();
-            groups.forEach(function(team){
-                var li = $('<li>').text(team)
-                $("#teams").append(li);
-            });
-            $("#random").removeClass("disabled").attr("disabled", false);
-            setTimeout(function(){ 
-              $("#ball").empty()
-              var h3 = $("<h3>").text("?")  
-              $("#ball").append(h3);
-            }, 700)
-          }, 3000);
-
-        }
-         
-        if(counter === groups.length-1){
-          $("#random").addClass("disabled").attr("disabled");
+              $("#teams").append(li);
+          });
+          $("#random").removeClass("disabled").attr("disabled", false);
           setTimeout(function(){ 
-            $("#ball").empty();
-            $("#teams").slideUp("slow");
-          }, 1000)
-        }
-     
-    })
+            $("#ball").empty()
+            var h3 = $("<h3>").text("?")  
+            $("#ball").append(h3);
+          }, 700)
+        }, 3000);
 
-    function genrandomIndex(groups){
-      return Math.floor(Math.random() * groups.length-1) + 1; 
-    }
+      }
+       
+      if(counter === groups.length-1){
+        $("#random").addClass("disabled").attr("disabled");
+        setTimeout(function(){ 
+          $("#ball").empty();
+          $("#teams").slideUp("slow");
+        }, 1000)
+      } 
+  });
+
+  function genrandomIndex(groups){
+    return Math.floor(Math.random() * groups.length-1) + 1; 
+  }
 })
     
    
